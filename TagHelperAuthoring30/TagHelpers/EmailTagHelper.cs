@@ -17,10 +17,15 @@ namespace TagHelperAuthoring30.TagHelpers
         // synchronous method, CANNOT call output.GetChildContentAsync();
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.TagName = "a";    // Replaces <email> with <a> tag
+            // 1. Set the HTML element as the tag name to replace it with, e.g. <a>
+            output.TagName = "a";
 
             var address = MailTo + "@" + EmailDomain;
+
+            // 2. Set the href attribute within that HTML element, e.g. href
             output.Attributes.SetAttribute("href", "mailto:" + address);
+
+            // 3. Set HTML Content within the tags.
             output.Content.SetContent(address);
         }
 
